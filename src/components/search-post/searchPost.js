@@ -1,13 +1,15 @@
 import React, {Component} from "react";
 
-
+import './search-posts.css';
 
 const SearchPost = () => {
 
     return (
-        <div>
-            <input placeholder='Type First letters in post You Want to Find...'></input>
-        </div>
+        <form className="search-panel">
+
+            <input className="form-control .search-input" placeholder='Type First letters in post You Want to Find...'></input>
+            
+        </form>
     )
 }
 

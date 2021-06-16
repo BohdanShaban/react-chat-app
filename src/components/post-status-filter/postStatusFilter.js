@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 
-
+import './post-status-filter.css'
 
 const PostStatusFilter = () => {
 

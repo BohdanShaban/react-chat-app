@@ -1,16 +1,17 @@
 import React, {Component} from "react";
 
-
+import './post-add-form.css';
 
 const PostAddForm = () => {
 
 
     return (
-        <div className=' d-flex justify-content-between'>
+        <form className='d-flex bottom-panel'>
             
-            <input placeholder="Input Your New Message..."></input>
+            <input className="form-control new-post-label" placeholder="Input Your New Message..."></input>
             <button className='btn btn-outline-secondary'>Send</button>
-        </div>
+
+        </form>
     )
 }
 
