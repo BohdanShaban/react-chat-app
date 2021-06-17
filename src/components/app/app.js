@@ -10,9 +10,17 @@ import './app.css';
 
 export default class App extends Component {
 
-    
+    state = {
+        data: [
+            { label: 'Some Post 0', important: true,  id: 0 },
+            { label: 'Some Post 1', important: false, id: 1 },
+            { label: 'Some Post 2', important: false, id: 2 }
+        ]
+    }
 
     render() {
+
+        const {data} = this.state;
 
         return (
            <div className="app">
@@ -21,7 +29,7 @@ export default class App extends Component {
                     < SearchPost />
                     < PostStatusFilter />
                </div>
-                < PostList />
+                < PostList data={data}/>
                 < PostAddForm />
            </div>
         )
