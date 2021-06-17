@@ -5,11 +5,8 @@ import './search-posts.css';
 const SearchPost = () => {
 
     return (
-        <form className="search-panel">
 
-            <input className="form-control .search-input" placeholder='Type First letters in post You Want to Find...'></input>
-            
-        </form>
+        <input className="form-control search-input" type="text" placeholder='Type First letters in searched post...'></input>
     )
 }
 

@@ -6,7 +6,7 @@ const PostStatusFilter = () => {
 
     
     return (
-        <div className="btn-group">
+        <div className="d-flex align-items-center">
             <button type="button" className="btn btn-info">All Posts</button>
             <button type="button" className="btn btn-outline-secondary">Liked Posts</button>
         </div>
