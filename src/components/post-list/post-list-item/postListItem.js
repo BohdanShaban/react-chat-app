@@ -2,12 +2,16 @@ import React, {Component} from "react";
 
 import './post-list-item.css';
 
-const PostListItem = ({label, important, id}) => {
+const PostListItem = ({label, important, liked, id}) => {
+
+    let classNames = 'app-list-item d-flex justify-content-between';
+    if(important) { classNames = classNames + ' important' }
+    if(liked) { classNames = classNames + ' like' }
 
 
     return (
 
-        <li className='app-list-item d-flex justify-content-between'>
+        <li key={id} className={classNames}>
             
             <span className="app-list-item-label">{label}</span>
 

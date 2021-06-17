@@ -12,9 +12,9 @@ export default class App extends Component {
 
     state = {
         data: [
-            { label: 'Some Post 0', important: true,  id: 0 },
-            { label: 'Some Post 1', important: false, id: 1 },
-            { label: 'Some Post 2', important: false, id: 2 }
+            { label: 'Some Post 0', important: true, liked: false, id: 0 },
+            { label: 'Some Post 1', important: false, liked: true, id: 1 },
+            { label: 'Some Post 2', important: false, liked: false, id: 2 }
         ]
     }
 

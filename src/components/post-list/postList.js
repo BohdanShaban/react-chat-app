@@ -13,8 +13,8 @@ export default class PostList extends Component {
     }
     
     generateContentFromData = ( data ) => {
-        return data.map( ({label, important, id}) => {
-            return < PostListItem label={label} important={important} id={id}/>
+        return data.map( ({label, important, liked, id}) => {
+            return < PostListItem label={label} important={important} liked={liked} id={id}/>
         })
     }
 
