@@ -12,12 +12,13 @@ export default class App extends Component {
 
     state = {
         data: [
-            { label: 'Some Post 0', important: true,  liked: false,  id: 0 },
-            { label: 'Some Post 1', important: false, liked: true,  id: 1 },
-            { label: 'Some Post 2', important: false, liked: false, id: 2 },
-            { label: 'Some Post 3', important: true, liked: false, id: 3 }
+            { label: 'Some Post 0', important: false,  liked: false,  id: 0 },
+            { label: 'Some Post 1', important: true, liked: false,  id: 1 },
+            { label: 'Some Post 1', important: true, liked: false,  id: 2 },
+            { label: 'Some Post 2', important: false, liked: true, id: 3 },
+            { label: 'Some Post 3', important: false, liked: true, id: 4 }
         ],
-        maxId: 3 
+        maxId: 4
     }
 
     togleStateArrParam = (param, id) => {
@@ -46,7 +47,7 @@ export default class App extends Component {
         this.togleStateArrParam( 'liked', id);
     }
 
-    onDelete = (id) => {
+    onPostDelete = (id) => {
         console.log(`ID of DELETED Post: ${id}`);
 
         this.setState( ({data}) => {
@@ -69,8 +70,8 @@ export default class App extends Component {
             const newElem  = { label: `${label}`, important: false, liked: false, id: ++maxId };
 
             const newArr = [ ...data, newElem];
-            
-            return { data: newArr }; // IMMUTABLE
+
+            return { data: newArr, maxId: ++maxId }; // IMMUTABLE
         })
     }
 
@@ -78,9 +79,12 @@ export default class App extends Component {
 
         const {data} = this.state;
 
+        const postsAmount = data.length;
+        const likedPosts = data.filter( item => item.liked).length;
+
         return (
            <div className="app">
-               < AppHeader />
+               < AppHeader postsAmount={postsAmount} likedPosts={likedPosts} />
                <div className="search-panel d-flex">
                     < SearchPost />
                     < PostStatusFilter />
@@ -88,7 +92,7 @@ export default class App extends Component {
                 < PostList  data={data} 
                             onTogleImportant={this.onTogleImportant}
                             onTogleLike={this.onTogleLike}
-                            onDelete={this.onDelete} />
+                            onPostDelete={this.onPostDelete} />
                 < PostAddForm onPostAdd={this.onPostAdd} />
            </div>
         )

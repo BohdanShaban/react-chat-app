@@ -2,7 +2,7 @@ import React, {Component} from "react";
 
 import './post-list-item.css';
 
-const PostListItem = ({label, important, liked, onTogleImportant, onTogleLike, onDelete, id}) => {
+const PostListItem = ({label, important, liked, onTogleImportant, onTogleLike, onPostDelete, id}) => {
 
     let classNames = 'app-list-item d-flex justify-content-between';
     if(important) { classNames = classNames + ' important' };
@@ -20,7 +20,7 @@ const PostListItem = ({label, important, liked, onTogleImportant, onTogleLike, o
                 <button type="button" className="btn-star btn-small" onClick={ onTogleImportant } >
                     <i className="fa fa-star"></i>
                 </button>
-                <button type="button" className="btn-star btn-small" onClick={ onDelete }>
+                <button type="button" className="btn-star btn-small" onClick={ onPostDelete }>
                     <i className="fa fa-trash-o"></i>
                 </button>
                 <i className="fa fa-heart" ></i>

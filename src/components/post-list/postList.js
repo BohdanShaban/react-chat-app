@@ -7,14 +7,14 @@ import './post-list.css';
 export default class PostList extends Component {
 
     generateContentFromData = ( data ) => {
-        const {onTogleImportant, onTogleLike, onDelete} = this.props;
+        const {onTogleImportant, onTogleLike, onPostDelete} = this.props;
 
         return data.map( ({ id , ...propsFromJsom}) => { // From item => Decomposed
             return <li key={id} className="list-item">
-                
+
                 < PostListItem {...propsFromJsom} onTogleImportant={() => {onTogleImportant(id)}}
                                                   onTogleLike={() => {onTogleLike(id)}} 
-                                                  onDelete={() => {onDelete(id)}} />
+                                                  onPostDelete={() => {onPostDelete(id)}} />
             </li>
         })
     }
