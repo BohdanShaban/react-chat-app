@@ -6,22 +6,23 @@ import './post-list.css';
 
 export default class PostList extends Component {
 
-    constructor(props) {
-        super(props);
-
-        this.someVar = 3; 
-    }
-    
     generateContentFromData = ( data ) => {
-        return data.map( ({label, important, liked, id}) => {
-            return < PostListItem label={label} important={important} liked={liked} id={id}/>
+        const {onTogleImportant, onTogleLike, onDelete} = this.props;
+
+        return data.map( ({ id , ...propsFromJsom}) => { // From item => Decomposed
+            return <li key={id}>
+                < PostListItem {...propsFromJsom} onTogleImportant={() => {onTogleImportant(id)}}
+                                                  onTogleLike={() => {onTogleLike(id)}} 
+                                                  onDelete={() => {onDelete(id)}} />
+            </li>
         })
     }
+
+
 
     render() {
 
         const {data} = this.props;
-
         const content = this.generateContentFromData(data);
         
 

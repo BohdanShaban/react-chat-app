@@ -2,30 +2,30 @@ import React, {Component} from "react";
 
 import './post-list-item.css';
 
-const PostListItem = ({label, important, liked, id}) => {
+const PostListItem = ({label, important, liked, onTogleImportant, onTogleLike, onDelete, id}) => {
 
     let classNames = 'app-list-item d-flex justify-content-between';
-    if(important) { classNames = classNames + ' important' }
-    if(liked) { classNames = classNames + ' like' }
+    if(important) { classNames = classNames + ' important' };
+    if(liked) { classNames = classNames + ' like' };
 
 
     return (
 
-        <li key={id} className={classNames}>
+        <div className={classNames}>
             
-            <span className="app-list-item-label">{label}</span>
+            <span className="app-list-item-label" onClick={ onTogleLike }>{label}</span>
 
             <div className="d-flex justify-content-center allign-items-center">
                 
-                <button type="button" className="btn-star btn-small">
+                <button type="button" className="btn-star btn-small" onClick={ onTogleImportant } >
                     <i className="fa fa-star"></i>
                 </button>
-                <button type="button" className="btn-star btn-small">
+                <button type="button" className="btn-star btn-small" onClick={ onDelete }>
                     <i className="fa fa-trash-o"></i>
                 </button>
-                <i className="fa fa-heart"></i>
+                <i className="fa fa-heart" ></i>
             </div>
-        </li>
+        </div>
     )
 }
 
