@@ -16,7 +16,8 @@ export default class App extends Component {
             { label: 'Some Post 1', important: false, liked: true,  id: 1 },
             { label: 'Some Post 2', important: false, liked: false, id: 2 },
             { label: 'Some Post 3', important: true, liked: false, id: 3 }
-        ]
+        ],
+        maxId: 3 
     }
 
     togleStateArrParam = (param, id) => {
@@ -60,6 +61,19 @@ export default class App extends Component {
         })
     }
 
+    onPostAdd = (label) => {
+        console.log(`Label (Text) of Added Post: ${label}`);
+
+        this.setState( ({data}) => { 
+            let {maxId} = this.state;
+            const newElem  = { label: `${label}`, important: false, liked: false, id: ++maxId };
+
+            const newArr = [ ...data, newElem];
+            
+            return { data: newArr }; // IMMUTABLE
+        })
+    }
+
     render() {
 
         const {data} = this.state;
@@ -75,7 +89,7 @@ export default class App extends Component {
                             onTogleImportant={this.onTogleImportant}
                             onTogleLike={this.onTogleLike}
                             onDelete={this.onDelete} />
-                < PostAddForm />
+                < PostAddForm onPostAdd={this.onPostAdd} />
            </div>
         )
     }
