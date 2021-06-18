@@ -10,7 +10,8 @@ export default class PostList extends Component {
         const {onTogleImportant, onTogleLike, onDelete} = this.props;
 
         return data.map( ({ id , ...propsFromJsom}) => { // From item => Decomposed
-            return <li key={id}>
+            return <li key={id} className="list-item">
+                
                 < PostListItem {...propsFromJsom} onTogleImportant={() => {onTogleImportant(id)}}
                                                   onTogleLike={() => {onTogleLike(id)}} 
                                                   onDelete={() => {onDelete(id)}} />

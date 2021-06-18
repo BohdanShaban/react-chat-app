@@ -14,7 +14,8 @@ export default class App extends Component {
         data: [
             { label: 'Some Post 0', important: true,  liked: false,  id: 0 },
             { label: 'Some Post 1', important: false, liked: true,  id: 1 },
-            { label: 'Some Post 2', important: false, liked: false, id: 2 }
+            { label: 'Some Post 2', important: false, liked: false, id: 2 },
+            { label: 'Some Post 3', important: true, liked: false, id: 3 }
         ]
     }
 
@@ -46,6 +47,17 @@ export default class App extends Component {
 
     onDelete = (id) => {
         console.log(`ID of DELETED Post: ${id}`);
+
+        this.setState( ({data}) => {
+            const idx = data.findIndex( item => item.id === id);
+
+            const beforeArr = [...data.slice(0, idx)];
+            const afterArr  = [...data.slice(idx + 1)];
+
+            const newArr = [ ...beforeArr, ...afterArr];
+
+            return { data: newArr }; // IMMUTABLE
+        })
     }
 
     render() {
