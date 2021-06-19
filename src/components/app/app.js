@@ -18,7 +18,8 @@ export default class App extends Component {
             { label: 'Some Post 2', important: false, liked: true, id: 3 },
             { label: 'Some Post 3', important: false, liked: true, id: 4 }
         ],
-        maxId: 4
+        maxId: 4,
+        showLikedPostsOnly: false
     }
 
     togleStateArrParam = (param, id) => {
@@ -68,28 +69,51 @@ export default class App extends Component {
         this.setState( ({data}) => { 
             let {maxId} = this.state;
             const newElem  = { label: `${label}`, important: false, liked: false, id: ++maxId };
-
             const newArr = [ ...data, newElem];
 
             return { data: newArr, maxId: ++maxId }; // IMMUTABLE
         })
     }
 
+    onTogleLikedOnlyShow = (boolParam) => {
+        this.setState( {showLikedPostsOnly: boolParam} );
+        console.log( `showLikedPostsOnly: ${this.state.showLikedPostsOnly}`);
+    }
+
+    dataInStateUpd = (data) => {
+
+        // !!!!! LOGIC MISTAKE !!!!!  —>  render() -> setState()  &  setState() -> render()
+
+        // this.setState( ({data}) => { 
+        //     const newData = data.filter( item => item.liked);
+        //     return { data: newData };
+        // })
+
+        return data.filter(item => item.like)
+    }
+
+
     render() {
 
-        const {data} = this.state;
+        const {data, showLikedPostsOnly} = this.state;
+        let visiblePosts = data;
+
+        if (showLikedPostsOnly) { // !!!!! LOGIC MISTAKE !!!!!  —>  render() -> setState()  &  setState() -> render()
+            visiblePosts = this.dataInStateUpd(data);
+        }
 
         const postsAmount = data.length;
         const likedPosts = data.filter( item => item.liked).length;
+
 
         return (
            <div className="app">
                < AppHeader postsAmount={postsAmount} likedPosts={likedPosts} />
                <div className="search-panel d-flex">
                     < SearchPost />
-                    < PostStatusFilter />
+                    < PostStatusFilter onTogleLikedOnlyShow={this.onTogleLikedOnlyShow} />
                </div>
-                < PostList  data={data} 
+                < PostList  posts={visiblePosts} 
                             onTogleImportant={this.onTogleImportant}
                             onTogleLike={this.onTogleLike}
                             onPostDelete={this.onPostDelete} />

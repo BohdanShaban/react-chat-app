@@ -23,8 +23,8 @@ export default class PostList extends Component {
 
     render() {
 
-        const {data} = this.props;
-        const content = this.generateContentFromData(data);
+        const {posts} = this.props;
+        const content = this.generateContentFromData(posts);
         
 
         return (

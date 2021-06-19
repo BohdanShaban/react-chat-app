@@ -2,13 +2,15 @@ import React, {Component} from "react";
 
 import './post-status-filter.css'
 
-const PostStatusFilter = () => {
+const PostStatusFilter = ({onTogleLikedOnlyShow}) => {
 
     
     return (
         <div className="d-flex align-items-center">
-            <button type="button" className="btn btn-info">All Posts</button>
-            <button type="button" className="btn btn-outline-secondary">Liked Posts</button>
+
+            <button onClick={ () => onTogleLikedOnlyShow(false) } type="button" className="btn btn-info">All Posts</button>
+            <button onClick={ () => onTogleLikedOnlyShow(true) } type="button" className="btn btn-outline-secondary">Liked Posts</button>
+
         </div>
     )
 }
