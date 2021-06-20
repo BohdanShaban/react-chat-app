@@ -2,12 +2,26 @@ import React, {Component} from "react";
 
 import './search-posts.css';
 
-const SearchPost = () => {
+export default class SearchPost extends Component {
 
-    return (
+    onValueChange = (e) => {
+        const inputStr = e.target.value;
+        this.props.onSearchStr(inputStr);
+    }
 
-        <input className="form-control search-input" type="text" placeholder='Type First letters in searched post...'></input>
-    )
+    
+    render() {
+
+        return (
+
+            <input 
+                 className="form-control search-input" 
+                 type="text" 
+                 placeholder='Type First letters in searched post...'
+                 onChange={ this.onValueChange }>
+    
+            </input>
+        )
+    }
 }
 
-export default SearchPost

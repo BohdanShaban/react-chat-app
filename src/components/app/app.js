@@ -19,7 +19,8 @@ export default class App extends Component {
             { label: 'Some Post 3', important: false, liked: true, id: 4 }
         ],
         maxId: 4,
-        showLikedPostsOnly: false
+        showLikedPostsOnly: false,
+        searchStr: ''
     }
 
     togleStateArrParam = (param, id) => {
@@ -64,7 +65,7 @@ export default class App extends Component {
     }
 
     onPostAdd = (label) => {
-        console.log(`Label (Text) of Added Post: ${label}`);
+        console.log(`App -> Label (Text) of Added Post: ${label}`);
 
         this.setState( ({data}) => { 
             let {maxId} = this.state;
@@ -77,40 +78,48 @@ export default class App extends Component {
 
     onTogleLikedOnlyShow = (boolParam) => {
         this.setState( {showLikedPostsOnly: boolParam} );
-        console.log( `showLikedPostsOnly: ${this.state.showLikedPostsOnly}`);
+        console.log( `App -> showLikedPostsOnly: ${this.state.showLikedPostsOnly}`);
     }
 
-    dataInStateUpd = (data) => {
+    onSearchStateStrChange = (str) => {
+        this.setState( {searchStr: str} );
+        console.log( `App -> searchStr: ${this.state.searchStr}`);
+    }
 
-        // !!!!! LOGIC MISTAKE !!!!!  —>  render() -> setState()  &  setState() -> render()
+    showLikedPosts = (posts) => {
+        return posts.filter(item => item.liked)
+    }
 
-        // this.setState( ({data}) => { 
-        //     const newData = data.filter( item => item.liked);
-        //     return { data: newData };
-        // })
-
-        return data.filter(item => item.like)
+    showPostsBySearchStr = (posts, searchStr) => {
+        
+        return posts.filter((item) => { // !!!!!
+            return item.label.indexOf(searchStr) > -1
+        });
     }
 
 
     render() {
 
-        const {data, showLikedPostsOnly} = this.state;
+        const {data, showLikedPostsOnly, searchStr} = this.state;
         let visiblePosts = data;
 
         if (showLikedPostsOnly) { // !!!!! LOGIC MISTAKE !!!!!  —>  render() -> setState()  &  setState() -> render()
-            visiblePosts = this.dataInStateUpd(data);
+            visiblePosts = this.showLikedPosts(data);
         }
 
-        const postsAmount = data.length;
-        const likedPosts = data.filter( item => item.liked).length;
+        if (searchStr !== '') { // OR: (searchStr.length === 0)
+            visiblePosts = this.showPostsBySearchStr(visiblePosts, searchStr);
+        }
+
+        const postsAmount = visiblePosts.length;
+        const likedPosts = visiblePosts.filter( item => item.liked).length;
 
 
         return (
            <div className="app">
                < AppHeader postsAmount={postsAmount} likedPosts={likedPosts} />
                <div className="search-panel d-flex">
-                    < SearchPost />
+                    < SearchPost onSearchStr={this.onSearchStateStrChange} />
                     < PostStatusFilter onTogleLikedOnlyShow={this.onTogleLikedOnlyShow} />
                </div>
                 < PostList  posts={visiblePosts} 
