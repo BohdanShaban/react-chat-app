@@ -31,7 +31,7 @@ export default class PostAddForm extends Component {
                     onSubmit={this.onSubmit}>
                 
                 <input  className="form-control new-post-label" 
-                        placeholder="Input Your New Message..."
+                        placeholder="Input Your New Message ..."
                         type="text"
                         onChange={this.onValueChange}
                         value={this.state.inputTxt} // CONTROLLED REACT COMP: State Improves on Comp

@@ -17,7 +17,7 @@ export default class SearchPost extends Component {
             <input 
                  className="form-control search-input" 
                  type="text" 
-                 placeholder='Type First letters in searched post...'
+                 placeholder='Type First letters of some of post words ...'
                  onChange={ this.onValueChange }>
     
             </input>

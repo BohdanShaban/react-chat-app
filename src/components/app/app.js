@@ -92,8 +92,9 @@ export default class App extends Component {
 
     showPostsBySearchStr = (posts, searchStr) => {
         
-        return posts.filter((item) => { // !!!!!
-            return item.label.indexOf(searchStr) > -1
+        return posts.filter((item) => { 
+            return item.label.indexOf(searchStr) > -1 // !!!!! indexOf(searchStr) -> Finds Exactly What User Typed !!!!!
+                                                      // !!!!! And If We Didn't Find That ->  -1 Will Be returned
         });
     }
 
